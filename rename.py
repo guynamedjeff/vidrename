@@ -22,7 +22,7 @@ def rename_tv_shows(title):
     n = 0
     # 're.I' flag performs case-insensitive matching.
     while re.search(r'e[0-9]+', titleSegments[n], re.I) == None:
-      titleSegments[n] = titleSegments[n].title()
+      titleSegments[n] = titleSegments[n].capitalize()
       n += 1
     titleSegments[n] = titleSegments[n].upper()
     title = '.'.join(titleSegments[:n+1])
@@ -37,7 +37,7 @@ def rename_movies(title):
     if re.search(year, title, re.I):
       n = 0
       while re.search(year, titleSegments[n], re.I) == None:
-        titleSegments[n] = titleSegments[n].title()
+        titleSegments[n] = titleSegments[n].capitalize()
         n += 1
       titleSegments[n] = titleSegments[n].upper()
       title = '.'.join(titleSegments[:n+1])
