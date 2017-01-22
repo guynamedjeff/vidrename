@@ -10,7 +10,9 @@ def rename(dir, pattern, titlePattern):
         title = remove_spaces(title)
         resolution, title = extract_resolution(title)
 
-        if re.search(r'e[0-9]+', title, re.I) or re.search(r'\.\d\d\d\.', title, re.I):
+        if re.search(r'e[0-9]+', title, re.I) or \
+           re.search(r'\.\d\d\d\.', title, re.I) or \
+           re.search(r'\dx\d+', title, re.I):
             title = rename_tv_shows(title)
         else:
             title = rename_movies(title)
@@ -24,6 +26,8 @@ def rename_tv_shows(title):
     # 're.I' flag performs case-insensitive matching.
     if re.search(r'e[0-9]+', title, re.I):
         match = r'e[0-9]+'
+    if re.search(r'\dx\d+', title, re.I):
+        match = r'\dx\d+'
     titleSegments, n = segment_by_type(titleSegments, match)
     titleSegments[n] = titleSegments[n].upper()
     title = '.'.join(titleSegments[:n+1])
