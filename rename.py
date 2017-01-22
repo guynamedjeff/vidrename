@@ -9,7 +9,7 @@ def rename(dir, pattern, titlePattern):
         title, ext = os.path.splitext(os.path.basename(pathAndFilename))
         title = remove_spaces(title)
         resolution = find_resolution(title).lower()
-        if re.search(r'e[0-9]+', title, re.I):
+        if re.search(r'e[0-9]+', title, re.I) or re.search(r'\.\d\d\d\.', title, re.I):
             title = rename_tv_shows(title)
         else:
             title = rename_movies(title)
@@ -19,11 +19,11 @@ def rename(dir, pattern, titlePattern):
 # Seperates titles with periods, reformats text, and removes added text references on tv files.
 def rename_tv_shows(title):
     titleSegments = title.split('.')
-    n = 0
     # 're.I' flag performs case-insensitive matching.
-    while re.search(r'e[0-9]+', titleSegments[n], re.I) == None:
-      titleSegments[n] = titleSegments[n].capitalize()
-      n += 1
+    match = r'^\d\d\d$'
+    if re.search(r'e[0-9]+', title, re.I):
+        match = r'e[0-9]+'
+    titleSegments, n = segment_by_type(titleSegments, match)
     titleSegments[n] = titleSegments[n].upper()
     title = '.'.join(titleSegments[:n+1])
     return title
@@ -60,6 +60,15 @@ def find_resolution(title):
     if match:
         return '.' + match.group()
     return ''
+
+# Reformats a title's segments based on type.
+# Returns a tuple of titleSegments and 'n' to denote a finishing point.
+def segment_by_type(titleSegments, match):
+    n = 0
+    while re.search(match, titleSegments[n], re.I) == None:
+      titleSegments[n] = titleSegments[n].capitalize()
+      n += 1
+    return titleSegments, n
 
 for extension in extensions:
     rename(directory, extension, r'%s')
