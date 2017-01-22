@@ -8,7 +8,8 @@ def rename(dir, pattern, titlePattern):
     for pathAndFilename in glob.iglob(os.path.join(dir, pattern)):
         title, ext = os.path.splitext(os.path.basename(pathAndFilename))
         title = remove_spaces(title)
-        resolution = find_resolution(title).lower()
+        resolution, title = extract_resolution(title)
+
         if re.search(r'e[0-9]+', title, re.I) or re.search(r'\.\d\d\d\.', title, re.I):
             title = rename_tv_shows(title)
         else:
@@ -38,12 +39,6 @@ def rename_movies(title):
       titleSegments[n] = titleSegments[n].upper()
       title = '.'.join(titleSegments[:n+1])
       return title
-
-    # If no year exists, but a resolution does.
-    match = re.search(r'\.[0-9]+p', title, re.I)
-    if match:
-        return '.'.join(titleSegments).replace(match.group(), '').title()
-
     return title.title()
 
 # Removes spaces, parenthesis, and hyphens from title.
@@ -53,11 +48,12 @@ def remove_spaces(title):
     return '.'.join(titleSegments).replace('.-','').replace('-','')
 
 # Returns resolution if there is a title match for a resolution.
-def find_resolution(title):
+# Also, removes any mentions of a resolution from the title string.
+def extract_resolution(title):
     match = re.search(r'[0-9]+p', title, re.I)
     if match:
-        return '.' + match.group()
-    return ''
+        return ('.' + match.group()).lower(), title.replace('.' + match.group(), '')
+    return '', title
 
 # Reformats a title's segments based on type.
 # Returns a tuple of titleSegments and 'n' to denote a finishing point.
