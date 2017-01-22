@@ -19,8 +19,8 @@ def rename(dir, pattern, titlePattern):
 # Seperates titles with periods, reformats text, and removes added text references on tv files.
 def rename_tv_shows(title):
     titleSegments = title.split('.')
-    # 're.I' flag performs case-insensitive matching.
     match = r'^\d\d\d$'
+    # 're.I' flag performs case-insensitive matching.
     if re.search(r'e[0-9]+', title, re.I):
         match = r'e[0-9]+'
     titleSegments, n = segment_by_type(titleSegments, match)
@@ -30,10 +30,9 @@ def rename_tv_shows(title):
 
 # Removes parenthesis, seperates titles with periods, and reformats text on movie files.
 def rename_movies(title):
-    title = title.replace("(","").replace(")","")
     titleSegments = title.split('.')
-    # 're.I' flag performs case-insensitive matching.
     match = r'\d\d\d\d'
+    # 're.I' flag performs case-insensitive matching.
     if re.search(match, title, re.I):
       titleSegments, n = segment_by_type(titleSegments, match)
       titleSegments[n] = titleSegments[n].upper()
@@ -47,12 +46,13 @@ def rename_movies(title):
 
     return title.title()
 
-# Removes spaces and hyphens from title.
+# Removes spaces, parenthesis, and hyphens from title.
 def remove_spaces(title):
+    title = re.sub('[()]', '', title)
     titleSegments = title.split()
     return '.'.join(titleSegments).replace('.-','').replace('-','')
 
-# Preserves resolution.
+# Returns resolution if there is a title match for a resolution.
 def find_resolution(title):
     match = re.search(r'[0-9]+p', title, re.I)
     if match:
