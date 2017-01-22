@@ -33,16 +33,14 @@ def rename_movies(title):
     title = title.replace("(","").replace(")","")
     titleSegments = title.split('.')
     # 're.I' flag performs case-insensitive matching.
-    year = r'\d\d\d\d'
-    if re.search(year, title, re.I):
-      n = 0
-      while re.search(year, titleSegments[n], re.I) == None:
-        titleSegments[n] = titleSegments[n].capitalize()
-        n += 1
+    match = r'\d\d\d\d'
+    if re.search(match, title, re.I):
+      titleSegments, n = segment_by_type(titleSegments, match)
       titleSegments[n] = titleSegments[n].upper()
       title = '.'.join(titleSegments[:n+1])
       return title
 
+    # If no year exists, but a resolution does.
     match = re.search(r'\.[0-9]+p', title, re.I)
     if match:
         return '.'.join(titleSegments).replace(match.group(), '').title()
