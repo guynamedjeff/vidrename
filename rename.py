@@ -14,9 +14,11 @@ def rename(dir, pattern, titlePattern):
               os.path.join(dir,titlePattern % title + resolution + ext))
 
 def segment_and_repair(title):
+    # Solve corner case for 3-digit episode numbers.
+    title = title + '.'
     titleSegments = title.split('.')
     match = 1
-    types = [r'e[0-9]+\.', r'\.\d\d\d\.', r'\dx\d+\.']
+    types = [r'e[0-9]', r'\.\d\d\d\.', r'\dx\d', r'\.\d\d\d\d\.']
     for t in types:
       if re.search(t, title, re.I):
         match = re.search(t, title, re.I)
