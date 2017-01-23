@@ -13,11 +13,13 @@ def rename(dir, pattern, titlePattern):
         os.rename(pathAndFilename,
               os.path.join(dir,titlePattern % title + resolution + ext))
 
+# Removes the junk attached to the end of each file name.
+# Adds a trailing period to the title to help distinguish digit length
+# Also, provides a fix for capitalization and returns the finished title.
 def segment_and_repair(title):
-    # Solve corner case for 3-digit episode numbers.
     title = title + '.'
     titleSegments = title.split('.')
-    match = 1
+    match = None
     types = [r'e[0-9]', r'\.\d\d\d\.', r'\dx\d', r'\.\d\d\d\d\.']
     for t in types:
       if re.search(t, title, re.I):
