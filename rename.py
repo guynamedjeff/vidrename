@@ -9,40 +9,21 @@ def rename(dir, pattern, titlePattern):
         title, ext = os.path.splitext(os.path.basename(pathAndFilename))
         title = remove_spaces(title)
         resolution, title = extract_resolution(title)
-
-        if re.search(r'e[0-9]+', title, re.I) or \
-           re.search(r'\.\d\d\d\.', title, re.I) or \
-           re.search(r'\dx\d+', title, re.I):
-            title = rename_tv_shows(title)
-        else:
-            title = rename_movies(title)
+        title = segment_and_repair(title)
         os.rename(pathAndFilename,
-            os.path.join(dir,titlePattern % title + resolution + ext))
+              os.path.join(dir,titlePattern % title + resolution + ext))
 
-# Seperates titles with periods, reformats text, and removes added text references on tv files.
-def rename_tv_shows(title):
+def segment_and_repair(title):
     titleSegments = title.split('.')
-    match = r'^\d\d\d$'
-    # 're.I' flag performs case-insensitive matching.
-    if re.search(r'e[0-9]+', title, re.I):
-        match = r'e[0-9]+'
-    if re.search(r'\dx\d+', title, re.I):
-        match = r'\dx\d+'
-    titleSegments, n = segment_by_type(titleSegments, match)
-    titleSegments[n] = titleSegments[n].upper()
-    title = '.'.join(titleSegments[:n+1])
-    return title
-
-# Removes parenthesis, seperates titles with periods, and reformats text on movie files.
-def rename_movies(title):
-    titleSegments = title.split('.')
-    match = r'\d\d\d\d'
-    # 're.I' flag performs case-insensitive matching.
-    if re.search(match, title, re.I):
-      titleSegments, n = segment_by_type(titleSegments, match)
-      titleSegments[n] = titleSegments[n].upper()
-      title = '.'.join(titleSegments[:n+1])
-      return title
+    match = 1
+    types = [r'e[0-9]+\.', r'\.\d\d\d\.', r'\dx\d+\.']
+    for t in types:
+      if re.search(t, title, re.I):
+        match = re.search(t, title, re.I)
+        titleSegments, n = segment_by_type(titleSegments, match.group())
+        titleSegments[n] = titleSegments[n].upper()
+        title = '.'.join(titleSegments[:n+1])
+        return title
     return title.title()
 
 # Removes spaces, parenthesis, and hyphens from title.
@@ -63,6 +44,7 @@ def extract_resolution(title):
 # Returns a tuple of titleSegments and 'n' to denote a finishing point.
 def segment_by_type(titleSegments, match):
     n = 0
+    match = match.replace(".","")
     while re.search(match, titleSegments[n], re.I) == None:
       titleSegments[n] = titleSegments[n].capitalize()
       n += 1
