@@ -22,7 +22,7 @@ def segment_and_repair(title):
     title = title + '.'
     titleSegments = title.split('.')
     match = None
-    types = [r'e[0-9]', r'\.\d\d\d\.', r'\dx\d', r'\.\d\d\d\d\.']
+    types = [r'e[0-9]', r'\.\d\d\d\.', r'\.\d+x\d', r'\.\d\d\d\d\.']
     for t in types:
       if re.search(t, title, re.I):
         match = re.search(t, title, re.I)
