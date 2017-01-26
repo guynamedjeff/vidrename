@@ -1,3 +1,6 @@
+#By: Jeff Roszkowski
+#https://github.com/guynamedjeff/vidrename
+
 import glob, os, re
 
 directory = r'D:\Downloads\test'
@@ -76,12 +79,3 @@ for extension in extensions:
 
 #rename(r'D:\Downloads\test', r'*.mp4', r'new(%s)')
 #changes 'Video.mp4' to 'new(Video).mp4' based on original
-
-#How to split in python from stackoverflow
-# http://stackoverflow.com/questions/17060039/split-string-at-nth-occurrence-of-a-given-character
-
-# text = '20_231_myString_234'
-# n = 2
-# groups = text.split('_')
-# '_'.join(groups[:n]), '_'.join(groups[n:])
-# ('20_231','myString_234')
