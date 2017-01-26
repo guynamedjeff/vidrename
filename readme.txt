@@ -3,9 +3,13 @@ https://github.com/guynamedjeff/vidrename
 
 Description:
 
-VidRename is a python-based portfolio project by entry-level full stack developer Jeff Roszkowski. The program is built to change a folder's media files, specifically '.mp4', '.avi', and '.mkv', into a more uniform format.
+VidRename is a python-based portfolio project by entry-level
+full stack developer Jeff Roszkowski. The program is built
+to change a folder's media files, specifically '.mp4', '.avi',
+and '.mkv', into a more uniform format.
 
-Currently, the user chooses this folder by naming it in the core file of 'rename.py' through the global variable 'directory'.
+Currently, the user chooses this folder by naming it in the
+core file of 'rename.py' through the global variable 'directory'.
 
 Examples:
 
