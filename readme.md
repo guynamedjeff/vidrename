@@ -18,6 +18,6 @@ Currently, the user chooses this folder by naming it in the core file of 'rename
 
 # Examples
 
-'rEd tEsT 720p 2012 gobble gobble.mp4' => 'Red.Test.2012.720p.mp4'
-'gold test s01e07 fork test garbage.avi' => 'Gold.Test.S01E07.avi'
-'run.mp4' => 'Run.mp4'
+* 'rEd tEsT 720p 2012 gobble gobble.mp4' => 'Red.Test.2012.720p.mp4'
+* 'gold test s01e07 fork test garbage.avi' => 'Gold.Test.S01E07.avi'
+* 'run.mp4' => 'Run.mp4'
