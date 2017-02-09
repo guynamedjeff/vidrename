@@ -3,8 +3,12 @@
 
 import glob, os, re
 
-directory = r'D:\Downloads\test'
-extensions = [r'*.mp4', r'*.mkv', r'*.avi']
+# Runs core application.
+def run_it(path):
+    extensions = [r'*.mp4', r'*.mkv', r'*.avi']
+    directory = r'%s' % path
+    for extension in extensions:
+        rename(directory, extension, r'%s')
 
 # Renames media files into a unified format.
 def rename(dir, pattern, titlePattern):
@@ -25,7 +29,7 @@ def segment_and_repair(title):
     title = title + '.'
     titleSegments = title.split('.')
     match = None
-    types = [r'\.s*\d*e\d+\.', r'\.\d\d\d\.', r'\.\d+x\d+\.', r'\.[1-2]\d\d\d\.']
+    types = [r'\.s*\d*e\d+', r'\.\d\d\d\.', r'\.\d+x\d+\.', r'\.[1-2]\d\d\d\.']
     for t in types:
       if re.search(t, title, re.I):
         match = re.search(t, title, re.I)
@@ -58,9 +62,6 @@ def segment_by_type(titleSegments, match):
       titleSegments[n] = titleSegments[n].capitalize()
       n += 1
     return titleSegments, n
-
-for extension in extensions:
-    rename(directory, extension, r'%s')
 
 ###############################Instructions###################################
 

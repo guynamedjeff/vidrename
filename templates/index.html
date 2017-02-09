@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <title>VidRename</title>
+</head>
+<body>
+  <h1>VidRename</h1>
+  <p>Welcome to VidRename!</p>
+  <form action="{{url_for('main')}}" method = 'POST'>
+     <input type="text" name="directory">
+<!--     <input type="file" name="directory" method="post" webkitdirectory directory multiple/> -->
+    <input type="submit" value="go">
+  </form>
+  <p><a href="{{url_for('about')}}">About</a></p>
+</body>
+</html>
