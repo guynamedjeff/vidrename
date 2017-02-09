@@ -17,7 +17,7 @@ def rename(dir, pattern, titlePattern):
         title = remove_spaces(title)
         resolution, title = extract_resolution(title)
         title = segment_and_repair(title)
-        while title[-1] is '.':
+        while title.endswith('.'):
             title = title[:-1]
         os.rename(pathAndFilename,
               os.path.join(dir,titlePattern % title + resolution + ext))
