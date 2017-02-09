@@ -5,10 +5,11 @@ https://github.com/guynamedjeff/vidrename
 # Prerequisites
 
 * [Python 2.7.12](https://www.python.org/)
+* [Flask 0.12](http://flask.pocoo.org/docs/0.12/)
 
 # Running / Development
 
-* Run 'rename.py'
+* Serve 'main.py'
 
 # Description
 
