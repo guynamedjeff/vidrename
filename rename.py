@@ -75,8 +75,3 @@ def segment_by_type(titleSegments, match):
 #         title, ext = os.path.splitext(os.path.basename(pathAndFilename))
 #         os.rename(pathAndFilename,
 #             os.path.join(dir,titlePattern % title + ext))
-
-#Example:
-
-#rename(r'D:\Downloads\test', r'*.mp4', r'new(%s)')
-#changes 'Video.mp4' to 'new(Video).mp4' based on original
