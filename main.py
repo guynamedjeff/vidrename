@@ -6,7 +6,9 @@ app = Flask(__name__)
 def main():
     if request.method == 'POST':
         directory = request.form['directory']
-        run_it(path=directory)
+        extensions = request.form.getlist('extensions')
+        if extensions:
+          run_it(path=directory, extensions=extensions)
         return redirect(url_for('main'))
     else:
         return render_template('index.html')

@@ -4,8 +4,7 @@
 import glob, os, re
 
 # Runs core application.
-def run_it(path):
-    extensions = [r'*.mp4', r'*.mkv', r'*.avi']
+def run_it(path, extensions):
     directory = r'%s' % path
     for extension in extensions:
         rename(directory, extension, r'%s')
