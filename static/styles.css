@@ -1,3 +1,31 @@
-h1{
-    color: #1f5441;
+body {
+    background-color: #FCFCFC;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h4 {
+    padding: 5px 0px;
+}
+
+.jumbotron {
+    background-color: #FCFCFC;
+    color: #006400;
+    font-family: 'Lobster', cursive;
+}
+
+.container-fluid {
+    padding: 60px 50px;
+    letter-spacing: 3px;
+}
+
+.sub-header {
+    padding: 0px 0px 40px 0px;
+}
+
+.container {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #d9d9d9;
+  padding: 20px 20px 20px 20px;
 }

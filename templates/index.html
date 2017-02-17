@@ -4,11 +4,34 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <p>Welcome to VidRename!</p>
-  <form action="{{url_for('main')}}" method = 'POST'>
-     <input type="text" name="directory">
-<!--     <input type="file" name="directory" method="post" webkitdirectory directory multiple/> -->
-    <input type="submit" value="go">
-  </form>
-  <p><a href="{{url_for('about')}}">About</a></p>
+  <div class="container-fluid">
+    <div class="container" id="application">
+        <form action="{{url_for('main')}}" method = 'POST'>
+          <div class="form-group">
+              <label>Directory Path:</label>
+              <input type="text" name="directory" class="form-control" placeholder="Enter directory path">
+          </div>
+          <label>Choose Extensions:</label>
+          <div class="checkbox">
+              <label><input type="checkbox" name="extensions" value="*.mp4"> MP4</label>
+              <label><input type="checkbox" name="extensions" value="*.mkv"> MKV</label>
+              <label><input type="checkbox" name="extensions" value="*.avi"> AVI</label>
+          </div>
+          <button type="submit" class="btn btn-default form-control">RENAME FILES</button>
+        </form>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <h2 class="text-center sub-header">How does it work?</h2>
+    <div class="row">
+      <div class="col-sm-6">
+            <h4><strong>TL;DR: Copy your directory path and paste it in the form to retitle your media files.</strong></h4>
+            <h4>This program will take a directory path from explorer and run that through a Python-based pattern recognition process. It will recognize the file extensions of your choosing, and it will appropriately retitle all files that contain those extensions.</h4>
+
+            <h4>VidRename is specifically designed to identify TV episodes and Movies. The end goal is to provide unification of filenames for the sake of readability and organization.</h4>
+        </div>
+    </div>
+  </div>
 {% endblock %}
+
+    <!--     <input type="file" name="directory" method="post" webkitdirectory directory multiple/> -->
