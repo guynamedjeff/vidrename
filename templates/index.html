@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <div class="container-fluid">
-    <div class="container" id="application">
+    <div class="container">
         <form action="{{url_for('main')}}" method = 'POST'>
           <div class="form-group">
               <label>Directory Path:</label>
@@ -24,7 +24,33 @@
   <div class="container-fluid">
     <h2 class="text-center sub-header">How does it work?</h2>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
+        <div class="thumbnail center-block">
+          <img src="static/images/test_start.jpg" id="myImg" class="imgMod center-block" alt="Starting Point">
+          <div class="port_caption text-center">
+            <p><strong>1. Find Your Folder</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="thumbnail center-block">
+          <img src="static/images/get_path.jpg" id="myImg2" class="imgMod center-block" alt="Getting Path">
+          <div class="port_caption text-center">
+            <p><strong>2. Get The Path</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="thumbnail center-block">
+          <img src="static/images/test_finish.jpg" id="myImg3" class="imgMod center-block" alt="End Result">
+          <div class="port_caption text-center">
+            <p><strong>3. The Result</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
             <h4><strong>TL;DR: Copy your directory path and paste it in the form to retitle your media files.</strong></h4>
             <h4>This program will take a directory path from explorer and run that through a Python-based pattern recognition process. It will recognize the file extensions of your choosing, and it will appropriately retitle all files that contain those extensions.</h4>
 
@@ -32,6 +58,12 @@
         </div>
     </div>
   </div>
+        <!-- IMAGE MODAL -->
+      <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
 {% endblock %}
 
     <!--     <input type="file" name="directory" method="post" webkitdirectory directory multiple/> -->

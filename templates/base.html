@@ -16,6 +16,8 @@
 
     <!-- IMPORT STATIC CONTENT -->
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='modal.css') }}">
+    <script src="static/modal.js" async></script>
     <title>{% block title %}{% endblock %} | VidRename</title>
     {% endblock %}
   </head>
@@ -23,7 +25,7 @@
   <body>
     <!-- HEADER CONTENT -->
     <div class="container-fluid jumbotron" id="header">
-      <h1 class="text-center">VidRename</h1>
+      <h1 class="text-center"><a href="{{url_for('main')}}">VidRename</a></h1>
     </div>
 
     <!-- ROUTE CONTENT -->
